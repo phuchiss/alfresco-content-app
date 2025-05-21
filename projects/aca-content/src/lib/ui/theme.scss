@@ -3,7 +3,6 @@
 @import '@alfresco/adf-core/theming';
 @import './custom-theme';
 @import './variables/variables';
-@include custom-theme($custom-theme);
 @include mat.core;
 
 :root {
@@ -354,4 +353,23 @@ adf-dynamic-component {
   top: 50%;
   right: 6px;
   transform: translateY(-50%);
+}
+
+// Dark theme specific overrides
+.dark-theme {
+  // Override for dialog data table row border
+  #{ms.$mdc-dialog} {
+    #{ms.$mat-data-table-row}:last-child #{ms.$mat-data-table-cell} {
+      border-bottom-color: var(--theme-divider-color); // Use the dark theme divider color
+    }
+  }
+
+  // Ensure snackbar text remains readable if background variables are correctly themed
+  // For example, if --theme-accent-color is dark in dark theme, white text is good.
+  // No explicit override needed here unless a specific snackbar type has issues.
+  // mat-snack-bar-container {
+  //   #{ms.$mat-button}#{ms.$mat-unthemed} {
+  //     // --mdc-text-button-label-text-color: var(--theme-text-color); // Or a specific contrast color
+  //   }
+  // }
 }

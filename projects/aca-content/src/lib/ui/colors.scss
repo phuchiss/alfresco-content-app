@@ -96,3 +96,80 @@ $aca-warn: (
     A700: white
   )
 );
+
+// Dark Theme Colors
+$dark-primary-bg: #121212; // Very dark grey, almost black
+$dark-surface-bg: #1e1e1e; // Slightly lighter grey for cards, dialogs
+
+// Dark theme primary palette (example: Teal)
+$dark-aca-primary-teal: (
+  50: #e0f2f1,
+  100: #b2dfdb,
+  200: #80cbc4,
+  300: #4db6ac,
+  400: #26a69a,
+  500: #009688,
+  600: #00897b,
+  700: #00796b,
+  800: #00695c,
+  900: #004d40,
+  A100: #a7ffeb,
+  A200: #64ffda,
+  A400: #1de9b6,
+  A700: #00bfa5,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: black,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: $black-87-opacity,
+    A400: $black-87-opacity,
+    A700: $black-87-opacity
+  )
+);
+
+// Dark theme accent palette (example: Amber)
+$dark-aca-accent-amber: (
+  50: #fff8e1,
+  100: #ffecb3,
+  200: #ffe082,
+  300: #ffd54f,
+  400: #ffca28,
+  500: #ffc107,
+  600: #ffb300,
+  700: #ffa000,
+  800: #ff8f00,
+  900: #ff6f00,
+  A100: #ffe57f,
+  A200: #ffd740,
+  A400: #ffc400,
+  A700: #ffab00,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: $black-87-opacity,
+    600: $black-87-opacity,
+    700: $black-87-opacity,
+    800: $black-87-opacity,
+    900: $black-87-opacity,
+    A100: $black-87-opacity,
+    A200: $black-87-opacity,
+    A400: $black-87-opacity,
+    A700: $black-87-opacity
+  )
+);
+
+// Dark theme warn palette (can be similar to light theme's warn, but ensure contrast with dark backgrounds)
+// Using the existing $aca-warn, but you might need to adjust if contrast is an issue.
+// For this example, let's assume $aca-warn is suitable.
+$dark-aca-warn: $aca-warn; // Or define a new one if needed

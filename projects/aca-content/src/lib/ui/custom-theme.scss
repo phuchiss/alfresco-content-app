@@ -35,11 +35,35 @@ $custom-theme: mat.m2-define-light-theme(
   )
 );
 
-@mixin custom-theme($theme) {
+// Dark Theme Palettes
+$dark-mat-primary-palette: mat.m2-define-palette($dark-aca-primary-teal, A100); // Or your chosen dark primary
+$dark-mat-accent-palette: mat.m2-define-palette($dark-aca-accent-amber, A200); // Or your chosen dark accent
+$dark-mat-warn-palette: mat.m2-define-palette($dark-aca-warn, A100); // Using existing warn, adjust if needed
+
+// Define the dark theme
+$custom-dark-theme: mat.m2-define-dark-theme((
+  color: (
+    primary: $dark-mat-primary-palette,
+    accent: $dark-mat-accent-palette,
+    warn: $dark-mat-warn-palette
+  ),
+  typography: $app-typography
+));
+
+// Mixin to apply all theme-specific styles
+@mixin _apply-theme-styles($theme) {
   @include mat.all-component-themes($theme);
   @include adf-core-theme($theme);
   @include adf-style-fixes($theme);
   @include adf-pagination-theme($theme);
-  @include ay11-theme;
+  @include ay11-theme; // Note: ay11-theme does not take a $theme variable, review if it needs dark theme adjustments
   @include adf-about-theme($theme);
+}
+
+// Apply light theme by default
+@include _apply-theme-styles($custom-theme);
+
+// Apply dark theme when .dark-theme class is present
+.dark-theme {
+  @include _apply-theme-styles($custom-dark-theme);
 }

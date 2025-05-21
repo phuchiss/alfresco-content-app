@@ -53,6 +53,19 @@ $light-grey-1: #d5d5d5;
 $light-grey-2: #d9d9d9;
 $light-grey-3: #dedede;
 
+// SCSS variables for Dark Theme
+$dark-foreground: map-get($custom-dark-theme, foreground);
+$dark-background: map-get($custom-dark-theme, background);
+$dark-background-color: mat.m2-get-color-from-palette($dark-background, background);
+$dark-background-card-color: mat.m2-get-color-from-palette($dark-background, card);
+$dark-text-color: mat.m2-get-color-from-palette($dark-foreground, text);
+$dark-secondary-text: mat.m2-get-color-from-palette($dark-foreground, secondary-text);
+$dark-theme-dropdown-background: color.scale($dark-background-color, $lightness: +5%);
+$dark-theme-dropdown-background-hover: color.scale($dark-background-color, $lightness: +10%);
+$dark-grey-divider: rgba(255, 255, 255, 0.12);
+$dark-selected-text-color: #FFFFFF;
+$dark-selected-background-color: rgba(mat.m2-get-color-from-palette($dark-mat-primary-palette, default), 0.3);
+
 // CSS Variables
 $defaults: (
   --theme-background-color: $background-color,
@@ -115,6 +128,72 @@ $defaults: (
 // propagates SCSS variables into the CSS variables scope
 :root {
   @each $name, $value in $defaults {
+    #{$name}: #{$value};
+  }
+}
+
+// After the $defaults map
+$dark-defaults: (
+  --theme-background-color: $dark-background-color,
+  --theme-search-background-color: color.scale($dark-background-color, $lightness: +2%),
+  --theme-text-color: mat.m2-get-color-from-palette($dark-foreground, text, 0.7),
+  --theme-sidenav-text-color: mat.m2-get-color-from-palette($dark-foreground, text),
+  --theme-sidenav-hovered-text-color: mat.m2-get-color-from-palette($dark-foreground, text),
+  --theme-sidenav-user-menu-color: mat.m2-get-color-from-palette($dark-foreground, text),
+  --theme-tab-active-text-color: mat.m2-get-color-from-palette($dark-foreground, text),
+  --theme-text-bold-color: mat.m2-get-color-from-palette($dark-foreground, text, 0.87),
+  --theme-title-color: mat.m2-get-color-from-palette($dark-foreground, text, 0.87),
+  --theme-text-disabled-color: mat.m2-get-color-from-palette($dark-foreground, text, 0.5),
+  --theme-border-color: mat.m2-get-color-from-palette($dark-foreground, text, 0.12),
+  --theme-card-background-color: $dark-background-card-color,
+  --theme-foreground-text-color: mat.m2-get-color-from-palette($dark-foreground, text, 0.87),
+  --theme-foreground-text-bold-color: mat.m2-get-color-from-palette($dark-foreground, text),
+  --theme-secondary-text-color: $dark-secondary-text,
+  --theme-divider-color: $dark-grey-divider,
+  --theme-dialog-background-color: mat.m2-get-color-from-palette($dark-background, dialog),
+  --theme-header-text-color: mat.m2-get-color-from-palette($dark-foreground, text, 0.87),
+  --new-button-font-size: 0.9rem,
+  --theme-grey-text-background-color: rgba(255, 255, 255, 0.08),
+  --theme-grey-background-color: rgba(255, 255, 255, 0.05),
+  --theme-grey-hover-background-color: rgba(255, 255, 255, 0.1),
+  --theme-blue-button-color: mat.m2-get-color-from-palette($dark-mat-primary-palette, default),
+  --theme-info-snackbar-background: mat.m2-get-color-from-palette($dark-mat-primary-palette, lighter),
+  --theme-blue-checkbox-color: mat.m2-get-color-from-palette($dark-mat-primary-palette, default),
+  --theme-blue-active-table-row-color: rgba(mat.m2-get-color-from-palette($dark-mat-primary-palette, default), 0.2),
+  --theme-heading-color: $dark-text-color,
+  --theme-content-color: $dark-secondary-text,
+  --theme-dropdown-color: $dark-theme-dropdown-background,
+  --theme-dropdown-background-hover: $dark-theme-dropdown-background-hover,
+  --theme-grey-divider-color: $dark-grey-divider,
+  --theme-pagination-background-color: $dark-background-color,
+  --theme-about-panel-border-color: $dark-grey-divider,
+  --theme-about-panel-background-color: $dark-background-card-color,
+  --theme-about-panel-title-color: mat.m2-get-color-from-palette($dark-foreground, text),
+  --theme-datetimepicker-font-color: $dark-text-color,
+  --theme-datetimepicker-selected-date-background: mat.m2-get-color-from-palette($dark-mat-primary-palette, default),
+  --theme-datetimepicker-cell-background: $dark-background-card-color,
+  --theme-datetimepicker-cell-focus-border: mat.m2-get-color-from-palette($dark-mat-primary-palette, default),
+  --theme-sidenav-background-color: $dark-background-color,
+  --theme-selected-text-color: $dark-selected-text-color,
+  --theme-selected-background-color: $dark-selected-background-color,
+  --theme-selected-text-background: rgba($dark-selected-text-color, 0.15),
+  --theme-hover-background-color: rgba(255, 255, 255, 0.08),
+  --theme-action-button-text-color: mat.m2-get-color-from-palette($dark-foreground, text, 0.7),
+  --theme-page-layout-header-background-color: $dark-background-card-color,
+  --theme-search-chip-icon-color: mat.m2-get-color-from-palette($dark-foreground, icons),
+  --theme-disabled-chip-background-color: rgba(255, 255, 255, 0.12),
+  --theme-secondary-text: $dark-secondary-text,
+  --theme-search-highlight-background-color: mat.m2-get-color-from-palette($dark-mat-accent-palette, default, 0.5),
+  --theme-text-light-color: rgba(255, 255, 255, 0.7),
+  --theme-card-background-grey-color: $dark-surface-bg,
+  --theme-light-grey-1-color: rgba(255,255,255,0.1),
+  --theme-light-grey-2-color: rgba(255,255,255,0.15),
+  --theme-light-grey-3-color: rgba(255,255,255,0.2)
+);
+
+// Add new rule for dark theme
+.dark-theme {
+  @each $name, $value in $dark-defaults {
     #{$name}: #{$value};
   }
 }
