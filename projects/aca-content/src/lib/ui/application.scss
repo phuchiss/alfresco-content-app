@@ -67,10 +67,337 @@ ng-component {
   width: 100%;
 }
 
+// Dark theme overrides for adf-login component
+.dark-theme {
+  adf-login {
+    // Set the host element's background, this is often where the background image is applied
+    // or the base color if no image.
+    background-color: var(--theme-background-color) !important;
+
+    // Target specific inner elements if the host override isn't enough
+    .adf-login__content {
+      background-color: var(--theme-background-color) !important;
+    }
+
+    // If the login form/box itself is on a card-like structure
+    .adf-login-content-panel,
+    .adf-login-container > div > mat-card { // Common structures in ADF
+      background-color: var(--theme-card-background-color) !important;
+      color: var(--theme-text-color) !important; // Ensure text on this panel is also themed
+
+      // Override for input fields if they are not inheriting properly
+      .mat-mdc-form-field, .mat-form-field {
+          .mat-mdc-text-field-wrapper, .mat-form-field-flex {
+              background-color: transparent !important; // Or a specific dark form field bg
+          }
+          input.mat-mdc-input-element, input.mat-input-element {
+              color: var(--theme-text-color) !important;
+          }
+          .mat-mdc-floating-label, .mat-form-field-label {
+              color: var(--theme-secondary-text-color) !important;
+          }
+          .mat-form-field-underline::before, .mat-form-field-ripple {
+            background-color: var(--theme-secondary-text-color) !important;
+          }
+      }
+    }
+
+    // General text elements within adf-login that might need color override
+    .adf-login__title,
+    .adf-login__subtitle,
+    .adf-login-actions label, // For "Remember me", "Need help?" etc.
+    h1, h2, h3, h4, h5, p, label { // General text elements
+      color: var(--theme-text-color) !important;
+    }
+  }
+}
+
 .aca-header-container {
   display: flex;
   flex-direction: row;
   flex: 1;
   align-items: center;
   width: 100%;
+}
+
+// Dark theme overrides for Library page components (ADF)
+.dark-theme {
+  // Document List
+  adf-document-list {
+    .adf-toolbar {
+      background-color: var(--theme-card-background-color) !important;
+      color: var(--theme-text-color) !important;
+
+      mat-icon {
+        color: var(--theme-text-color) !important;
+      }
+
+      button .mat-mdc-button-persistent-ripple {
+        background-color: var(--theme-text-color) !important;
+      }
+    }
+
+    .adf-datatable-header {
+      background-color: var(--theme-card-background-color) !important;
+      color: var(--theme-secondary-text-color) !important;
+      border-bottom-color: var(--theme-divider-color) !important;
+    }
+
+    .adf-datatable-row {
+      background-color: var(--theme-background-color) !important;
+      color: var(--theme-text-color) !important;
+      border-bottom-color: var(--theme-divider-color) !important;
+
+      &:hover {
+        background-color: var(--theme-hover-background-color) !important;
+      }
+
+      &.adf-is-selected {
+        background-color: var(--theme-selected-background-color) !important;
+        color: var(--theme-selected-text-color) !important;
+      }
+    }
+
+    .adf-empty-content__icon,
+    .adf-empty-content__title,
+    .adf-empty-content__message {
+      color: var(--theme-secondary-text-color) !important;
+    }
+
+    .adf-datatable-cell--image { // For thumbnails
+        background-color: transparent !important;
+    }
+
+    // Ensure text in cells is readable
+    .adf-datatable-cell, .adf-datatable-cell-value, .adf-datatable-cell a {
+        color: var(--theme-text-color) !important;
+    }
+    .adf-datatable-row.adf-is-selected .adf-datatable-cell a { // Selected row link color
+        color: var(--theme-selected-text-color) !important;
+    }
+  }
+
+  // Breadcrumbs
+  adf-breadcrumb {
+    .adf-breadcrumb-item-current { // Current folder/location
+      color: var(--theme-text-bold-color) !important;
+    }
+    .adf-breadcrumb-item-path { // Path links
+      color: var(--theme-secondary-text-color) !important;
+      &:hover {
+        color: var(--theme-text-color) !important;
+      }
+    }
+    mat-icon { // Separator icon
+      color: var(--theme-secondary-text-color) !important;
+    }
+  }
+
+  // General page content area if it's not body, e.g., inside adf-sidenav-layout
+  .mat-drawer-content, // Common for content area in sidenav layouts
+  .adf-layout-content { // Another common ADF class for main content
+    background-color: var(--theme-background-color) !important;
+    color: var(--theme-text-color) !important;
+  }
+
+  // Toolbar used in various places
+  mat-toolbar.adf-toolbar {
+    background-color: var(--theme-card-background-color) !important;
+    color: var(--theme-text-color) !important;
+
+    .mat-mdc-button-touch-target {
+      color: var(--theme-text-color) !important;
+    }
+
+    .mat-icon {
+      color: var(--theme-text-color) !important;
+    }
+  }
+
+  // Ensure cards used on library page (e.g. for info panels) are themed
+  .mat-mdc-card, .adf-card {
+    background-color: var(--theme-card-background-color) !important;
+    color: var(--theme-text-color) !important;
+  }
+
+  // General text elements to ensure readability in dark theme
+  &, // Applies to the .dark-theme element itself (body)
+  p,
+  span,
+  div,
+  li,
+  label,
+  th, // Table headers
+  td { // Table cells (though adf-datatable is more specific)
+    color: var(--theme-text-color); // Default light text color
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--theme-title-color); // Specific light title color
+  }
+
+  a {
+    color: var(--theme-primary-color); // Use primary color for links (needs to be defined in $dark-defaults)
+    &:hover {
+      color: var(--theme-primary-color-light); // Use lighter primary for hover (needs to be defined in $dark-defaults)
+    }
+  }
+
+  // Ensure Material form field default text color (not covered by adf-login specific)
+  .mat-mdc-form-field {
+    .mat-mdc-text-field-wrapper input.mat-mdc-input-element,
+    .mat-mdc-text-field-wrapper textarea.mat-mdc-input-element,
+    .mat-mdc-text-field-wrapper select.mat-mdc-input-element {
+      color: var(--theme-text-color);
+    }
+    .mdc-floating-label, .mat-mdc-floating-label { // Standard and MDC floating labels
+      color: var(--theme-secondary-text-color);
+    }
+    .mat-mdc-form-field-hint, .mat-mdc-form-field-error { // Hint and error text
+        color: var(--theme-secondary-text-color);
+    }
+  }
+
+  // Material buttons that are not explicitly ADF styled
+  .mat-mdc-button:not([class*='mat-accent']):not([class*='mat-primary']):not([class*='mat-warn']),
+  .mat-mdc-icon-button:not([class*='mat-accent']):not([class*='mat-primary']):not([class*='mat-warn']) {
+    color: var(--theme-text-color); // For standard/text buttons
+  }
+
+  // Material list items
+  .mat-mdc-list-item .mdc-list-item__primary-text,
+  .mat-mdc-list-item .mdc-list-item__secondary-text {
+    color: var(--theme-text-color);
+  }
+  .mat-mdc-list-item .mat-icon {
+    color: var(--theme-secondary-text-color); // Icons in list items
+  }
+
+  // Material menu items
+  .mat-mdc-menu-item .mdc-list-item__primary-text {
+      color: var(--theme-text-color);
+  }
+   .mat-mdc-menu-item .mat-icon {
+      color: var(--theme-secondary-text-color);
+  }
+
+  // Material Tab labels
+  .mat-mdc-tab .mdc-tab__text-label {
+      color: var(--theme-secondary-text-color);
+  }
+  .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+      color: var(--theme-tab-active-text-color);
+  }
+
+  // Material Dialogs general text
+  .mat-mdc-dialog-title {
+    color: var(--theme-title-color);
+  }
+  .mat-mdc-dialog-content {
+    color: var(--theme-text-color);
+  }
+
+  // Additional key areas review
+  // Search Page specific components
+  .adf-search-results-page, // Assuming a wrapper class for a search page
+  .adf-search-results-container { // Or another common wrapper
+    background-color: var(--theme-background-color) !important;
+    color: var(--theme-text-color) !important;
+  }
+
+  adf-search-control {
+    .mat-mdc-form-field, .mat-form-field-appearance-outline .mat-form-field-outline { // Ensure form field theming
+      background-color: transparent !important; // Or specific dark form field bg
+    }
+    input.adf-search-control__input {
+      color: var(--theme-text-color) !important;
+    }
+    .adf-search-control__icon {
+        color: var(--theme-secondary-text-color) !important;
+    }
+  }
+
+  .adf-search-filters { // Common wrapper for search filters
+    background-color: var(--theme-card-background-color) !important; // Often a panel/card
+    color: var(--theme-text-color) !important;
+    .mat-chip-set, .mat-mdc-chip-set { // Chip sets used for filters
+        .mat-mdc-chip, .mat-chip {
+            background-color: var(--theme-grey-background-color) !important; // Using a subtle grey for chips
+            color: var(--theme-text-color) !important;
+            .mat-icon, .mat-mdc-chip-remove-icon {
+                color: var(--theme-secondary-text-color) !important;
+            }
+            &.mat-mdc-chip-selected, &.mat-chip-selected {
+                background-color: var(--theme-primary-color) !important;
+                color: var(--theme-selected-text-color) !important;
+            }
+        }
+    }
+  }
+
+  // Content Metadata / Properties
+  adf-content-metadata {
+    background-color: var(--theme-card-background-color) !important;
+    color: var(--theme-text-color) !important;
+    .mat-mdc-card-header-text { // Ensure header text is themed
+        color: var(--theme-title-color) !important;
+    }
+  }
+
+  adf-card-view {
+    .adf-property-list { // Overall list container
+      background-color: transparent !important; // Let parent card control bg
+    }
+    .adf-property, .adf-card-view-row { // Each property row
+      border-bottom: 1px solid var(--theme-divider-color) !important;
+      &:last-child {
+        border-bottom: none !important;
+      }
+    }
+    .adf-property-label, .adf-card-view-property-label {
+      color: var(--theme-secondary-text-color) !important;
+    }
+    .adf-property-value, .adf-card-view-property-value, .adf-card-view-value {
+      color: var(--theme-text-color) !important;
+      a { // Links within property values
+        color: var(--theme-primary-color) !important;
+        &:hover {
+          color: var(--theme-primary-color-light) !important;
+        }
+      }
+    }
+  }
+
+  // Side Navigation panel itself
+  .mat-drawer, mat-sidenav { // Sidenav container
+    background-color: var(--theme-card-background-color) !important; // Often card-like or slightly off main bg
+    color: var(--theme-text-color) !important;
+    border-right-color: var(--theme-divider-color) !important; // If border exists
+  }
+  // Ensure nav list items within are also covered if previous list item styles weren't specific enough
+  .mat-drawer mat-nav-list .mat-mdc-list-item .mdc-list-item__primary-text,
+  mat-sidenav mat-nav-list .mat-mdc-list-item .mdc-list-item__primary-text {
+      color: var(--theme-text-color);
+  }
+   .mat-drawer mat-nav-list .mat-icon,
+   mat-sidenav mat-nav-list .mat-icon {
+      color: var(--theme-secondary-text-color);
+  }
+
+
+  // General Dialog Container (MDC)
+  .mdc-dialog__surface { // This is the actual dialog box for MDC based dialogs
+      background-color: var(--theme-dialog-background-color) !important;
+      color: var(--theme-text-color) !important; // Default text color for dialog content
+  }
+  // For older mat-dialog-container if still used by some ADF components
+  mat-dialog-container {
+      background-color: var(--theme-dialog-background-color) !important;
+      color: var(--theme-text-color) !important;
+  }
 }
